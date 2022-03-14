@@ -12,7 +12,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({providedIn: 'root'})
 export class HeroService {
 
-  private heroesUrl = 'api/heroes';  // URL to web api
+  private heroesUrl = 'https://6229de55be12fc4538aa6c8e.mockapi.io/Heroes';  // URL to web api
 
   constructor(
     private http: HttpClient,
@@ -39,7 +39,7 @@ export class HeroService {
 
     /** PUT: update the hero on the server */
     updateHero(hero: Hero): Observable<any> {
-      return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+      return this.http.put(this.heroesUrl + "/" + hero.id, hero, this.httpOptions).pipe(
         tap(_ => this.log(`updated hero id=${hero.id}`)),
         catchError(this.handleError<any>('updateHero'))
       );
