@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+//import { HEROES } from './mock-heroes';
 import { MessageService } from './message.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -29,7 +29,7 @@ export class HeroService {
     }
 
     /** GET hero by id. Will 404 if id not found */
-    getHero(id: number): Observable<Hero> {
+    getHero(id: string): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
@@ -58,7 +58,7 @@ export class HeroService {
     };
 
     /** DELETE: delete the hero from the server */
-    deleteHero(id: number): Observable<Hero> {
+    deleteHero(id: string): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
 
       return this.http.delete<Hero>(url, this.httpOptions).pipe(
